@@ -424,7 +424,6 @@ FROM (
     FROM (
       SELECT convention, order, REPLACE(title, '_Jr', ',_Jr') title
       FROM [fh-bigquery:public_dump.convention3]
-    #  WHERE title CONTAINS 'Trump'
       ) a
     JOIN [fh-bigquery:wikidata.latest_enesjafrde_v1_a] b
     ON a.title=b.en_wiki
@@ -433,8 +432,6 @@ FROM (
 ) a
 JOIN [fh-bigquery:wikipedia.pagecounts_201606] b
 ON a.title=b.title
-#LEFT JOIN [fh-bigquery:wikidata.subclasses]  c
-#ON a.occupation=c.numeric_id
 WHERE language='en'
 GROUP BY 1,2,3,4,5,6
 ORDER BY convention, order
